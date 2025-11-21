@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+<head>
+    <title>Registration Form</title>
+</head>
+<body>
+    <h1>Registration Form</h1>
+    <form>
+        <fieldset align="center">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <label for="DOB">Date of Birth:</label>
+        <input type="date" id="DOB" name="DOB" required><br><br>
+
+        <label for="textarea">About You:</label><br>
+        <textarea id="textarea" name="textarea" rows="4" cols="50">Start Typing...</textarea><br><br>
+        
+        <input type="submit" value="Register">
+    </fieldset>
+    </form>
+</body>
+<style>
+    body {
+        user-select: ;none;
+        hover: rgb(79, 34, 34);
+        background-color: lightblue;
+        text-align: center;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        hover: lightgrey;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+        color: darkblue;
+    }
+    form {
+        background-color: rgb(252, 253, 252);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        display: inline-block;
+        text-align: left;
+    }
+    label {
+        display: inline-block;
+        width: 120px;
+        margin-bottom: 10px;
+    }
+    input[type="text"], input[type="email"], input[type="password"], input[type="date"], textarea {
+        width: 100%;
+        padding: 8px;   
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        hover: lightgrey;
+    }
+    fieldset {
+        border: 2px solid darkblue;
+        padding: 20px;
+        border-radius: 10px;
+        hover: lightgrey;
+    }
+    input[type="submit"] {
+        background-color: darkblue;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        hover: lightgrey;
+    }
+    input[type="submit"]:hover {
+        background-color: navy;
+    }
+    textarea {
+        resize: vertical;
+    }
+</style>
+</html>

@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TripMate — Tours (Glassmorphism Theme)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Nunito+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --primary: #2E97F2; /* sky blue */
+      --accent: #FF7E5F;  /* coral */
+      --muted: rgba(255,255,255,0.65);
+      --dark: #0F172A;
+      --glass: rgba(255,255,255,0.06);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:'Nunito Sans',system-ui,Segoe UI,Roboto; background:linear-gradient(180deg,#f7f4ea 0%, #e6f5ff 100%); color:var(--dark); -webkit-font-smoothing:antialiased}
+
+    /* NAV */
+    .nav{position:fixed;inset:20px 30px auto 30px;display:flex;justify-content:space-between;align-items:center;z-index:40}
+    .nav-left{display:flex;align-items:center;gap:18px}
+    .brand{display:flex;align-items:center;gap:10px;color:var(--muted);font-weight:700}
+    .nav-links{display:flex;gap:18px;align-items:center;background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));backdrop-filter:blur(8px);padding:10px 16px;border-radius:14px;border:1px solid rgba(255,255,255,0.08)}
+    .nav-links a{color:var(--muted);text-decoration:none;font-weight:600;font-size:14px;opacity:0.95}
+    .btn-book{padding:10px 14px;border-radius:999px;background:linear-gradient(90deg,var(--primary),var(--accent));color:white;font-weight:700;border:0;box-shadow:0 8px 30px rgba(46,151,242,0.15);cursor:pointer}
+
+    /* HERO */
+    .hero{height:78vh;min-height:560px;border-radius:14px;margin:40px auto 28px;max-width:1100px;position:relative;overflow:hidden;box-shadow:0 30px 80px rgba(15,23,42,0.12)}
+    .hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:contrast(1.02) saturate(1.05)}
+    .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg, rgba(15,23,42,0.22) 10%, rgba(15,23,42,0.65) 70%)}
+    .hero-content{position:relative;z-index:4;padding:48px;display:flex;flex-direction:column;height:100%;justify-content:flex-end}
+    .eyebrow{color:rgba(255,255,255,0.9);font-weight:700;letter-spacing:2px}
+    .hero-title{font-family:'Poppins';font-size:98px;color:rgba(255,255,255,0.95);line-height:0.85;margin:6px 0;text-shadow:0 6px 30px rgba(2,6,23,0.45)}
+
+    /* horizontal card strip */
+    .strip{position:absolute;left:48px;bottom:120px;display:flex;gap:14px;z-index:5}
+    .small-card{width:140px;height:86px;border-radius:8px;overflow:hidden;background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,0.08);box-shadow:0 10px 30px rgba(2,6,23,0.18);display:flex;flex-direction:column}
+    .small-card img{width:100%;height:60%;object-fit:cover}
+    .small-card .lbl{padding:8px;color:white;font-weight:700;font-size:13px}
+    .small-card.dim{opacity:0.95}
+    .book-cta{position:absolute;right:48px;bottom:110px;z-index:6}
+
+    /* ABOUT + TIMELINE */
+    .sheet{max-width:1100px;margin:18px auto;padding:48px 24px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0));border-radius:12px}
+    .section-title{font-family:'Poppins';font-size:28px;color:var(--dark);letter-spacing:2px;margin:6px 0 18px}
+
+    .about-row{display:flex;gap:30px;align-items:flex-start}
+    .about-left{flex:1}
+    .about-right{width:320px}
+
+    /* timeline */
+    .timeline{position:relative;padding-left:36px}
+    .timeline:before{content:'';position:absolute;left:18px;top:6px;bottom:6px;width:2px;background:linear-gradient(180deg,var(--primary),var(--accent));opacity:0.12}
+    .t-item{position:relative;margin-bottom:28px}
+    .t-item .dot{position:absolute;left:9px;top:4px;width:18px;height:18px;border-radius:50%;background:linear-gradient(90deg,var(--primary),var(--accent));box-shadow:0 6px 18px rgba(46,151,242,0.18)}
+    .t-item .card{margin-left:48px;background:rgba(255,255,255,0.03);padding:10px 12px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);color:var(--dark)}
+
+    /* what's included */
+    .included{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:24px}
+    .inc-card{padding:18px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.05)}
+    .inc-card h4{margin:0 0 6px}
+    .inc-card p{margin:0;color:#6b7280}
+
+    /* form area */
+    .contact-hero{position:relative;margin-top:28px;border-radius:12px;overflow:hidden}
+    .contact-bg{height:260px;background-size:cover;background-position:center}
+    .contact-form{position:absolute;left:48px;bottom:28px;background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));backdrop-filter:blur(8px);padding:20px;border-radius:12px;border:1px solid rgba(255,255,255,0.06);width:360px}
+    .contact-form input,.contact-form textarea{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);margin-top:8px;background:transparent;color:var(--dark)}
+    .contact-form button{margin-top:10px}
+
+    /* footer */
+    footer.site{max-width:1100px;margin:28px auto 80px;text-align:center;color:#7b8794}
+
+    /* responsive */
+    @media (max-width:980px){
+      .hero-title{font-size:56px}
+      .strip{left:20px;bottom:90px}
+      .sheet{padding:24px}
+      .about-row{flex-direction:column}
+      .about-right{width:100%}
+      .included{grid-template-columns:repeat(2,1fr)}
+      .contact-form{left:18px;width:calc(100% - 36px)}
+    }
+    @media (max-width:560px){
+      .nav{left:12px;right:12px}
+      .hero{margin:20px 12px}
+      .hero-title{font-size:44px}
+      .strip{display:none}
+      .included{grid-template-columns:1fr}
+    }
+
+    /* small animations */
+    .fade-up{transform:translateY(10px);opacity:0;transition:all .6s cubic-bezier(.2,.9,.2,1)}
+    .fade-up.show{transform:none;opacity:1}
+
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <div class="nav">
+    <div class="nav-left">
+      <div class="brand">🌐 TripMate</div>
+    </div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#included">Included</a>
+      <a href="#contact">Contacts</a>
+      <button class="btn-book" id="navBook">Book</button>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <main class="hero" id="hero">
+    <div class="hero-bg" id="heroBg" style="background-image:url('https://images.unsplash.com/photo-1549693578-d683be217e58?auto=format&fit=crop&w=1650&q=80')"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="eyebrow">JAPAN TOURS</div>
+      <div class="hero-title" id="heroTitle">JAPAN</div>
+      <div style="display:flex;gap:12px;align-items:center;margin-top:14px">
+        <div style="color:var(--muted);max-width:640px">Three-city curated experience — Osaka, Kyoto & Tokyo. 10 days of culture, food, and magical sights. Choose another destination from the selector to preview other tours.</div>
+        <div style="margin-left:auto"></div>
+      </div>
+    </div>
+
+    <!-- horizontal small cards -->
+    <div class="strip" id="strip"></div>
+
+    <div class="book-cta">
+      <button class="btn-book" id="heroBook">Book</button>
+    </div>
+
+  </main>
+
+  <!-- main sheet -->
+  <section class="sheet" id="about">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div>
+        <div class="section-title">ABOUT THE TOUR</div>
+        <p style="color:#475569;max-width:700px">We've planned a simple and convenient itinerary for your trip. No need to worry about routes, schedules, or finding places — everything is organized so you can enjoy the journey.</p>
+      </div>
+
+      <div style="display:flex;gap:12px;align-items:center">
+        <label style="color:#6b7280;font-weight:700">Destination</label>
+        <select id="destSel" style="padding:8px;border-radius:8px;border:1px solid rgba(15,23,42,0.05)">
+          <option value="japan">Japan — Osaka / Kyoto / Tokyo</option>
+          <option value="bali">Bali — Kuta / Ubud / Nusa Dua</option>
+          <option value="paris">Paris — City of Lights</option>
+          <option value="maldives">Maldives — Island Escape</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="about-row" style="margin-top:26px">
+      <div class="about-left">
+        <div class="timeline" id="timeline">
+          <!-- timeline items injected by JS -->
+        </div>
+      </div>
+      <div class="about-right">
+        <div style="background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.04)">
+          <h3 style="margin:0">Trip Snapshot</h3>
+          <p style="margin:8px 0;color:#6b7280" id="tripSnapshot">10-day itinerary • Flights & Hotels included • Local guides</p>
+          <div style="display:flex;gap:8px;margin-top:12px">
+            <div style="background:rgba(255,255,255,0.03);padding:10px;border-radius:8px">Duration<br><strong>10 days</strong></div>
+            <div style="background:rgba(255,255,255,0.03);padding:10px;border-radius:8px">Avg Budget<br><strong id="avgBudget">₹2,00,000</strong></div>
+            <div style="background:rgba(255,255,255,0.03);padding:10px;border-radius:8px">Best Time<br><strong id="bestTime">Apr–Oct</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- what's included -->
+    <div style="margin-top:18px">
+      <div class="section-title">WHAT'S INCLUDED</div>
+      <div class="included" id="included">
+        <div class="inc-card"><h4>Guides</h4><p>Experienced local guides who know the culture.</p></div>
+        <div class="inc-card"><h4>Flights</h4><p>Roundtrip flights (where applicable) between cities.</p></div>
+        <div class="inc-card"><h4>Transfers</h4><p>Airport & local transfers included.</p></div>
+        <div class="inc-card"><h4>Hotels</h4><p>Comfortable stays with breakfast included.</p></div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- contact / form -->
+  <section class="contact-hero" id="contact">
+    <div class="contact-bg" id="contactBg" style="background-image:url('https://images.unsplash.com/photo-1505765050382-1804f7a8b7a9?auto=format&fit=crop&w=1600&q=80')"></div>
+    <div class="contact-form fade-up" id="contactForm">
+      <h3 style="margin:0">Want to join us, but still have questions?</h3>
+      <p style="margin:6px 0 10px;color:#6b7280;max-width:300px">Leave a request and we'll get back to you with details.</p>
+      <input id="cName" placeholder="Your name" />
+      <input id="cPhone" placeholder="Phone number" />
+      <textarea id="cNotes" rows="3" placeholder="Comment"></textarea>
+      <button class="btn-book" id="sendReq">Send</button>
+    </div>
+  </section>
+
+  <footer class="site">
+    © TripMate — Designed in glassmorphism theme
+  </footer>
+
+  <script>
+    /* ---------- Data for multiple destinations ---------- */
+    const TOURS = {
+      japan: {
+        title: 'JAPAN',
+        heroImg: 'https://images.unsplash.com/photo-1549693578-d683be217e58?auto=format&fit=crop&w=1650&q=80',
+        strip:[
+          {img:'https://images.unsplash.com/photo-1526481280698-1bfa7b2a6d0c?auto=format&fit=crop&w=800&q=60',label:'3 cities in Japan'},
+          {img:'https://images.unsplash.com/photo-1505765050382-1804f7a8b7a9?auto=format&fit=crop&w=800&q=60',label:'10 days'},
+          {img:'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=60',label:'eat ramen'},
+          {img:'https://images.unsplash.com/photo-1511988617509-a57c8a288659?auto=format&fit=crop&w=800&q=60',label:'enjoy the vibe'}
+        ],
+        timeline:[
+          {days:'Days 1–3',place:'Osaka',desc:'Arrive, local markets, castle visit, street food.'},
+          {days:'Days 4–6',place:'Kyoto',desc:'Temples, gardens, cultural experiences.'},
+          {days:'Days 7–10',place:'Tokyo',desc:'City exploration, museums, shopping.'}
+        ],
+        snapshot:'10-day itinerary • Flights & Hotels included • Local guides',
+        budget:'₹2,00,000', bestTime:'Apr–Oct'
+      },
+      bali:{
+        title:'BALI', heroImg:'https://images.unsplash.com/photo-1508182315872-c52f3b6a6d7b?auto=format&fit=crop&w=1650&q=80',
+        strip:[{img:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=60',label:'Beaches'},{img:'https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&w=800&q=60',label:'Rice terraces'},{img:'https://images.unsplash.com/photo-1528909514045-2fa4ac7a08ba?auto=format&fit=crop&w=800&q=60',label:'5 days'},{img:'https://images.unsplash.com/photo-1549887534-3b92d1a9c2f8?auto=format&fit=crop&w=800&q=60',label:'surf & relax'}],
+        timeline:[{days:'Day 1',place:'Kuta',desc:'Beach day & nightlife.'},{days:'Day 2–3',place:'Ubud',desc:'Rice terraces & temples.'},{days:'Day 4–5',place:'Nusa Dua',desc:'Water sports and relax.'}],
+        snapshot:'5-day Bali highlights • Beach stays • Water activities',budget:'₹85,000',bestTime:'Apr–Oct'
+      },
+      paris:{
+        title:'PARIS', heroImg:'https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?auto=format&fit=crop&w=1650&q=80',
+        strip:[{img:'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=60',label:'Eiffel Tower'},{img:'https://images.unsplash.com/photo-1526481280698-1bfa7b2a6d0c?auto=format&fit=crop&w=800&q=60',label:'Museums'},{img:'https://images.unsplash.com/photo-1488747279002-c8523379faaa?auto=format&fit=crop&w=800&q=60',label:'Romance'},{img:'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=800&q=60',label:'Cafés'}],
+        timeline:[{days:'Days 1–3',place:'Left Bank',desc:'Museums & strolls.'},{days:'Days 4–6',place:'Montmartre',desc:'Art & viewpoints.'},{days:'Days 7–9',place:'Versailles',desc:'Palace & gardens.'}],
+        snapshot:'9-day Paris • Arts & culinary • Museum passes',budget:'₹2,00,000',bestTime:'Apr–Oct'
+      },
+      maldives:{
+        title:'MALDIVES', heroImg:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1650&q=80',
+        strip:[{img:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=60',label:'Water Villas'},{img:'https://images.unsplash.com/photo-1502920917128-1aa500764b1e?auto=format&fit=crop&w=800&q=60',label:'Snorkeling'},{img:'https://images.unsplash.com/photo-1477234042722-6d1a7a1d0b6b?auto=format&fit=crop&w=800&q=60',label:'Relax'}, {img:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=60',label:'5 days'}],
+        timeline:[{days:'Day 1',place:'Arrival',desc:'Island check-in & relax.'},{days:'Days 2–4',place:'Explore',desc:'Water activities & spa.'},{days:'Day 5',place:'Departure',desc:'Leisure & transfer.'}],
+        snapshot:'5-day island escape • Luxury villas • Water sports',budget:'₹1,10,000',bestTime:'Dec–Apr'
+      }
+    };
+
+    // helper to render hero strip & title
+    function renderTour(key){
+      const tour = TOURS[key];
+      document.getElementById('heroBg').style.backgroundImage = `url('${tour.heroImg}')`;
+      document.getElementById('heroTitle').textContent = tour.title;
+
+      // strip cards
+      const strip = document.getElementById('strip'); strip.innerHTML='';
+      tour.strip.forEach(s=>{
+        const c = document.createElement('div'); c.className='small-card'; c.innerHTML = `<img src="${s.img}?auto=format&fit=crop&w=600&q=60" alt=""><div class='lbl'>${s.label}</div>`; strip.appendChild(c);
+      });
+
+      // timeline
+      const tl = document.getElementById('timeline'); tl.innerHTML='';
+      tour.timeline.forEach(item=>{
+        const div = document.createElement('div'); div.className='t-item fade-up';
+        div.innerHTML = `<div class='dot'></div><div class='card'><div style="font-weight:800">${item.place}</div><div style="font-size:13px;color:#6b7280;margin-top:6px">${item.days} — ${item.desc}</div></div>`;
+        tl.appendChild(div);
+      });
+
+      document.getElementById('tripSnapshot').textContent = tour.snapshot;
+      document.getElementById('avgBudget').textContent = tour.budget;
+      document.getElementById('bestTime').textContent = tour.bestTime;
+
+      // animate
+      setTimeout(()=>{document.querySelectorAll('.fade-up').forEach(el=>el.classList.add('show'));},80);
+    }
+
+    // init
+    const select = document.getElementById('destSel');
+    renderTour('japan');
+    select.addEventListener('change', ()=>{ renderTour(select.value); window.scrollTo({top:0,behavior:'smooth'}); });
+
+    // contact form send (mock)
+    document.getElementById('sendReq').addEventListener('click',()=>{
+      const name = document.getElementById('cName').value.trim();
+      alert((name?name:'Traveler') + ', thanks! We received your request — we will contact you shortly.');
+      document.getElementById('cName').value=''; document.getElementById('cPhone').value=''; document.getElementById('cNotes').value='';
+    });
+
+    // Book button
+    document.getElementById('heroBook').addEventListener('click', ()=>{ alert('Booking flow would open here (mock).'); });
+    document.getElementById('navBook').addEventListener('click', ()=>{ document.getElementById('contact').scrollIntoView({behavior:'smooth'}); });
+
+  </script>
+</body>
+</html>

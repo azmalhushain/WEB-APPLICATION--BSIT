@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zoom Image with Reset</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #ffecd2, #fcb69f);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+    }
+
+    .image-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+
+    .image-container:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+    }
+
+    img {
+      width: 350px;
+      height: auto;
+      cursor: pointer;
+      transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+      border-radius: 20px;
+    }
+
+    .zoom-level {
+      position: absolute;
+      bottom: 10px;
+      right: 15px;
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      padding: 5px 12px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 500;
+      user-select: none;
+      letter-spacing: 0.5px;
+    }
+
+    button {
+      margin-top: 25px;
+      padding: 10px 25px;
+      font-size: 16px;
+      background: #ff7a18;
+      color: #fff;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 600;
+      box-shadow: 0 5px 15px rgba(255, 122, 24, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: #ff5714;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(255, 87, 20, 0.5);
+    }
+
+    button:active {
+      transform: scale(0.96);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="image-container">
+    <img id="zoomImage" src="zoom.jpg" alt="Zoomable Image">
+    <div class="zoom-level" id="zoomText">Zoom: 1x</div>
+  </div>
+
+  <button id="resetButton">🔄 Reset Zoom</button>
+
+  <script>
+    const img = document.getElementById("zoomImage");
+    const zoomText = document.getElementById("zoomText");
+    const resetBtn = document.getElementById("resetButton");
+
+    let zoomLevel = 1;
+    let maxZoom = 10; // you can adjust this limit
+
+    // Zoom on click
+    img.addEventListener("click", () => {
+      if (zoomLevel < maxZoom) {
+        zoomLevel += 1;
+      } else {
+        zoomLevel = 1;
+      }
+
+      img.style.transform = `scale(${zoomLevel})`;
+      zoomText.textContent = `Zoom: ${zoomLevel}x`;
+
+      // small animation "pop" for interactivity
+      img.animate(
+        [
+          { transform: `scale(${zoomLevel * 0.95})` },
+          { transform: `scale(${zoomLevel})` }
+        ],
+        { duration: 300, easing: "ease-out" }
+      );
+    });
+
+    // Reset zoom on button click
+    resetBtn.addEventListener("click", () => {
+      zoomLevel = 1;
+      img.style.transform = `scale(1)`;
+      zoomText.textContent = "Zoom: 1x";
+
+      img.animate(
+        [
+          { transform: "scale(1.1)" },
+          { transform: "scale(1)" }
+        ],
+        { duration: 400, easing: "ease-in-out" }
+      );
+    });
+  </script>
+
+</body>
+</html>
